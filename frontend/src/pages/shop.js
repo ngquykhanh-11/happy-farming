@@ -3,6 +3,9 @@ import { MainNav } from "../components/nav";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+ //doi mot luc moi thay san pham tren shop nhee hoi lau day
+ //kha lau nen doi chac tam 1-2p nheee
+ //dung mat kien nhan ma tuong bi loi a :))))))))) -khanh
 const Shop = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("All");

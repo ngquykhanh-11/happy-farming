@@ -26,7 +26,7 @@ const TransactionHistory = () => {
       .append("svg")
       .attr("width", width)
       .attr("height", height);
-
+   
     // this calculates the amounts based on the history
     const amounts = history.map(tran => {
       const match = tran.deducted.match(/- ([\d.]+)/);

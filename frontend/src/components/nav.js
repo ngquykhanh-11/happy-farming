@@ -1,13 +1,20 @@
-// src/components/nav.jsx
 import { Link } from "react-router-dom";
 import "../styles/nav.css";
 import { Sidebar } from "./sidebar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const LogoWeb = "/logo1.png";
 
 const MainNav = () => {
   const [showSidebar, setShowSidebar] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    const savedUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (savedUser?.username) {
+      setCurrentUser(savedUser.username);
+    }
+  }, []);
 
   return (
     <>
@@ -22,15 +29,19 @@ const MainNav = () => {
           />
         </p>
 
-        <p className="nav-hover"><Link to="/login">Login</Link></p>
-        <p className="nav-hover"><Link to="/shop">Shop</Link></p>
 
-        <Link to="/create-wallet" id="create-wallet">
-          Connect Wallet
-        </Link>
+        <p className="nav-hover">
+          {currentUser ? (
+            <span style={{ color: "#095a5d" }}>Hi, {currentUser}</span>
+          ) : (
+            <Link to="/login">Login</Link>
+          )}
+        </p>
+
+        <p className="nav-hover"><Link to="/shop">Shop</Link></p>
+        <Link to="/create-wallet" id="create-wallet">Connect Wallet</Link>
       </nav>
 
-      {/* Sidebar is always rendered, shown based on `showSidebar` */}
       <Sidebar isOpen={showSidebar} onClose={() => setShowSidebar(false)} />
     </>
   );
